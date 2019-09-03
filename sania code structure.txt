@@ -1,0 +1,7 @@
+1. VPC is going through the public gateway to the outer world. The same VPC ip range will be used in the gateway process.
+2. Internet gateway will be creating after running the template and will be used in the VPC.
+3. Subnet1 and subnet2 is going outside directly to the world.
+4. Application is using subnet1 and subnet2 iP ranges for load balancing
+5. The security Group is using the same IPs range of VPC
+6. In PublicLoadBalancerSecurityGroup , I used VPC IPs range to give access  through internet.
+7. both Subnets are in the VPC and autoscaling is working on VPC.  

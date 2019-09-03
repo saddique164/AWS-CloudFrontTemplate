@@ -1,0 +1,49 @@
+Please be aware of the fact that we are not only looking at the actual deliverables but also on your road to these designs. We are mostly interested in the person behind the assessment. If the assessment is successful enough, the next step will be a presentation given to some of our team members.
+ 
+The deliverables are:
+a time log of your activities and the road to the solutions
+per question (1 to 4) a complete answer, including designs and reasoning of chosen components and configurations
+if applicable including template files
+publish the deliverables to us
+Context:
+The solution will need to land on AWS
+ 
+******************************************************************
+ 
+A: You have a client which is a webshop. They have a standard Magento setup with MySQL on a single VPS at their current provider and want to bring this to AWS.
+The external software (Magento) is managed, developed and maintained by an external party.
+ 
+1. Design an architecture which incorporates the following client needs. The clients know that his whole setup is going to evolve constantly. Include a cloud formation template for programmable infrastructure for your design.
+Needs to be scalable and flexible
+Needs to have low latency for SEO purposes
+Needs to be cost effective
+
+# check out the scripts for it.
+ 
+2. After releasing the new architecture, business takes on, and the client decides to add customer reviews.
+Do you need to alter your architecture? And if so, how?
+
+ 1) This will not need to change my AWS architecture. However, the reviews could be add in the application. Since Our application is beimg 
+    developed by  third party, I would use the same git source control respository, which is being used to install the Magento application.
+    I will  ask the third party to modify the git code and I will use jenkins pipeline for integration with the that git respository. In the 
+    groovy declaration code I will add the staging node for deploying the application for testing purpose. The staging URL, will be shared with 
+    the third party to check the affect. If everything goes fine, the code will be migrated to production instance. However, we would require the Down time
+    for the activities.
+ 
+ 2) If we use docker swarm cluster or docker engine on EC2, then it will be more easy to deploy the image instead of all packages. For this the Pipeline will be created using Groovy language on jenkins
+    and image will be created from the git Source Code. This image will be pushed on Docker repository and when we will want to deploy it on the EC2 instance, EC2 command line will pull the image and deploy it
+    on Docker engine. 
+
+ 
+3. At some point, one of the customer employees is getting very good at creating vlogs, and the client wants to give customers the opportunity to upload videos with their reviews. They want to store the thumbnails and videos for later processing, and they want to show thumbnails of the videos underneath the product pages.
+Alter your architecture to process and store these videos.
+
+   i. For achieving this task, I will let him upload the video on s3 and I will make them public. After that the S3 URL will be added in the website by the developer in magento application
+      and clients or visitor we will be able to watch it directly.     
+ 
+4. At some point, some clients uploaded non-compliant video's and which created a huge marketing issue. The client now wants to screen the uploaded video's before putting them online, but with minimal costs.
+Alter your architecture to be able to screen and process these video's.
+
+  i) For this I would write a image processing code in Lamda. This code will prause through S3 bucket and check the Images. If Images will be with same pixel and resolution with other one,
+    I will delete it. Through this way the number of images will be low down and the cost will automatically be decrease.
+
